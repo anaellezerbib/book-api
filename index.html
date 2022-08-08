@@ -1,0 +1,68 @@
+<!--meme chose avec google books api : -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fetch JSON from API</title>
+  </head>
+  <body>
+    <h1>Data from the API</h1>
+<!-- ici mettre le submit bouton qui prend la requete-->
+    <p>
+      <b>The data from Google API are : </b><br><br>
+      Title: <span id="title"></span><br><br>
+      Author: <span id="authors"></span><br><br>
+      Published Date : <span id="publishedDate"></span><br><br>
+      SelfLink : <span id="selfLink"></span><br><br>
+      Description : <span id="description"></span><br><br>
+    </p>
+
+    <script>
+
+      const api_url = "https://www.googleapis.com/books/v1/volumes?q=Alice aux pays des merveilles";
+
+      async function getData() {
+        const response = await fetch(api_url);
+        const data = await response.json();
+        console.log('the data volume Info are1', JSON.stringify(data.items[0].volumeInfo.title));
+        
+        const title = data.items[0].volumeInfo.title;
+        const authors = data.items[0].volumeInfo.authors;
+        const publishedDate = data.items[0].volumeInfo.publishedDate;
+        const description = data.items[0].volumeInfo.description;
+        const selfLink = data.items[0].selfLink;
+        
+        
+        
+        document.getElementById('title').textContent = title;
+        document.getElementById('authors').textContent = authors;
+        document.getElementById('publishedDate').textContent = publishedDate;
+        document.getElementById('description').textContent = description;
+        document.getElementById('selfLink').textContent = selfLink;
+        
+        
+       <!--
+       
+       
+       console.log('the data are1', JSON.stringify(data));
+        const id = data.data[0].id;
+        const email = data.data[0].email;
+        const first_name = data.data[0].first_name;
+        const last_name = data.data[0].last_name;
+        const avatar = data.data[0].avatar;
+        
+
+        document.getElementById('id').textContent = id;
+        document.getElementById('email').textContent = email;
+        document.getElementById('first_name').textContent = first_name;
+        document.getElementById('last_name').textContent = last_name;
+        document.getElementById('avatar').textContent = avatar;       
+        -->
+      }
+
+      getData();
+    </script>
+  </body>
+</html>
